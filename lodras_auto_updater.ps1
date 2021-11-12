@@ -3,7 +3,6 @@ $downloadUrlBase = 'https://www.hwinfo.com/files/hwi_'
 $destination = 'C:\Program Files\HWiNFO64'
 $log = "$destination\lodras_auto_updater.log"
 $versionFile = "$destination\version.txt"
-$profileName = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 
 Function Write-Log
 {
