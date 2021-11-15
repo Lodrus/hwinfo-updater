@@ -5,8 +5,8 @@ if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
     Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
 }
 
-$action = New-ScheduledTaskAction -Execute 'Powershell.exe'`
-    -Argument "-windowstyle hidden -NonInteractive -ExecutionPolicy Bypass -File '$PSScriptRoot\lodras_auto_updater.ps1'"
+$action = New-ScheduledTaskAction -Execute "$PsHome\powershell.exe"`
+    -Argument "-windowstyle hidden -NonInteractive -ExecutionPolicy Bypass -File `"$PSScriptRoot\lodras_auto_updater.ps1`""
 
 # MS doesn't provide support for the desired "SessionUnlock" trigger. So we build it the complicated way
 $stateChangeTrigger = Get-CimClass `
@@ -27,4 +27,4 @@ $principal = New-ScheduledTaskPrincipal $env:UserName -Id "Author" -RunLevel Hig
 
 $settings = New-ScheduledTaskSettingsSet -RunOnlyIfNetworkAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 10) -MultipleInstances IgnoreNew
 
-Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "Created by 'Lodra's HWiNFO64 Updater!'" | Out-Null
+Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "Created by 'Lodra's HWiNFO64 Updater!'"
