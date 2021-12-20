@@ -23,7 +23,7 @@ $trigger = New-CimInstance `
 $trigger.Delay = 'PT1M'
 $trigger.Enabled = $true
 
-$principal = New-ScheduledTaskPrincipal $env:UserName -Id "Author" -RunLevel Highest
+$principal = New-ScheduledTaskPrincipal $env:UserName -Id "Author" -RunLevel Highest -LogonType S4U
 
 $settings = New-ScheduledTaskSettingsSet -RunOnlyIfNetworkAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 10) -MultipleInstances IgnoreNew
 
